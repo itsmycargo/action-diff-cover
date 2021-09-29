@@ -8,6 +8,7 @@ inputs:
     required: true
   diff_cover_version:
     description: 'diff-cover version'
+    default: latest
   diff_cover_flags:
     description: 'diff-cover flags.'
     default: ''

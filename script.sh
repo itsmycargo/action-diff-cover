@@ -15,8 +15,14 @@ echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/review
 curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${TEMP_PATH}" "${REVIEWDOG_VERSION}" 2>&1
 echo '::endgroup::'
 
+if [ "$INPUT_DIFF_COVER_VERSION" = "latest" ]; then
+  DIFF_COVER_VERSION=""
+else
+  # set desired reek version
+  DIFF_COVER_VERSION="==${INPUT_DIFF_COVER_VERSION}"
+fi
 echo '::group:: Installing diff-cover ... https://github.com/Bachmann1234/diff_cover'
-pip install diff-cover==$INPUT_DIFF_COVER_VERSION
+pip install diff-cover${DIFF_COVER_VERSION}
 echo '::endgroup::'
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
